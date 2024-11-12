@@ -56,8 +56,13 @@ The script will:
 Example output:
 ```
 4 Lightning Bolt (DMR)
-4 Consider (MID)
 4 Counterspell (DMR)
+```
+or with 0
+```
+Lightning Bolt (DMR)
+Counterspell (DMR)
+
 ```
 
 ## API Reference
