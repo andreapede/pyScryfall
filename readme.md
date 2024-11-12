@@ -56,7 +56,7 @@ The script will:
 Example output:
 ```
 4 Lightning Bolt (DMR)
-Consider (MID)
+4 Consider (MID)
 4 Counterspell (DMR)
 ```
 
