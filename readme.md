@@ -4,18 +4,38 @@
 ![License](https://img.shields.io/badge/license-Attribution_Only-green.svg)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Scryfall](https://img.shields.io/badge/API-Scryfall-orange.svg)
-![Format](https://img.shields.io/badge/format-Pauper-purple.svg)
+![Features](https://img.shields.io/badge/formats-10-purple.svg)
 
-A Python script to fetch Magic: The Gathering cards from Scryfall API, specifically designed for Pauper format deck building.
+A Python script to fetch Magic: The Gathering cards from Scryfall API, with support for multiple formats and flexible search options.
 
 ## Features
 
-- Search Pauper-legal cards from specific Magic: The Gathering sets
+### Core Features
+- Search cards from specific Magic: The Gathering sets
+- Filter by game format (Standard, Modern, Legacy, etc.)
 - Display cards with customizable number of copies
 - Generate deck lists in a standard format
 - Export results to text files
+- Color filtering support
 - Respects Scryfall API rate limits
-- Error handling for API requests
+- Comprehensive error handling
+
+### Supported Formats
+- Standard
+- Modern
+- Legacy
+- Vintage
+- Commander
+- Pauper
+- Pioneer
+- Brawl
+- Historic
+- Penny
+
+### Interface Options
+- Command Line Interface (CLI) with comprehensive arguments
+- Interactive mode with guided input
+- Automatic fallback to interactive mode when no arguments provided
 
 ## Requirements
 
@@ -37,40 +57,63 @@ pip install requests
 
 ## Usage
 
-Run the script:
+### Command Line Interface
 ```bash
+# Basic usage with CLI arguments
+python pyscryfall.py --set neo --format pauper --copies 4
+
+# Full example with all options
+python pyscryfall.py --set neo --format modern --copies 4 --colors ur --output deck.txt --verbose
+
+# Show help
+python pyscryfall.py --help
+```
+
+### Interactive Mode
+```bash
+# Launch in interactive mode
 python pyscryfall.py
 ```
 
-The script will:
-1. Ask for a set code (e.g., 'neo' for Kamigawa: Neon Dynasty)
-2. Ask for the default number of copies for each card (0-4)
-3. Display the list of Pauper-legal cards from the specified set
-4. Offer to save the results to a text file
+The interactive mode will guide you through:
+1. Set selection
+2. Format selection
+3. Number of copies
+4. Color filtering
+5. Output file specification
+6. Verbose mode toggle
+
+### Command Line Arguments
+
+| Argument | Short | Description | Default |
+|----------|-------|-------------|---------|
+| --set | -s | Set code (e.g., neo) | Required |
+| --format | -f | Game format | pauper |
+| --copies | -c | Number of copies (0-4) | 0 |
+| --colors | -col | Color filter (w,u,b,r,g) | None |
+| --output | -o | Output file path | None |
+| --verbose | -v | Enable verbose output | False |
+| --version | | Show version | |
 
 ### Output Format
 
-- When copies > 0: `N Card Name (SET)`
-- When copies = 0: `Card Name (SET)`
+- With copies > 0: `N Card Name (SET)`
+- With copies = 0: `Card Name (SET)`
 
 Example output:
 ```
 4 Lightning Bolt (DMR)
+Consider (MID)
 4 Counterspell (DMR)
-```
-or with 0
-```
-Lightning Bolt (DMR)
-Counterspell (DMR)
-
 ```
 
 ## API Reference
 
 This project uses the [Scryfall API](https://scryfall.com/docs/api). The script implements:
 - Card search endpoint
-- Pauper format filtering
+- Format filtering
 - Set-based filtering
+- Color filtering
 - Automatic pagination handling
 
 ## Contributing
