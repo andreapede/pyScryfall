@@ -8,7 +8,9 @@ from pathlib import Path
 from enum import Enum, auto
 
 class Format(Enum):
-    """Supported Magic: The Gathering formats"""
+    """Supported Magic: The Gathering formats
+    Formati supportati di Magic: The Gathering
+    """
     STANDARD = 'standard'
     MODERN = 'modern'
     LEGACY = 'legacy'
