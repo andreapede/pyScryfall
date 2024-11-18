@@ -24,6 +24,14 @@ class Format(Enum):
 
 class PyScryfall:
     def __init__(self, verbose: bool = False):
+        """
+        Initialize the PyScryfall client.
+        Inizializza il client PyScryfall.
+        
+        Args:
+            verbose (bool): Enable verbose logging if True.
+                            Abilita il logging verboso se True.
+        """
         self.base_url = "https://api.scryfall.com"
         self.search_endpoint = "/cards/search"
         self.delay = 0.1  # 100ms delay between requests as per Scryfall guidelines
@@ -40,14 +48,19 @@ class PyScryfall:
     def search_cards(self, set_code: str, format_name: Format, colors: Optional[str] = None) -> List[Dict]:
         """
         Search for cards in a specific set and format.
+        Cerca carte in un set specifico e formato.
         
         Args:
-            set_code (str): The set code to search for
-            format_name (Format): The format to filter by
-            colors (str, optional): Color filter (w,u,b,r,g)
+            set_code (str): The set code to search for.
+                            Il codice del set da cercare.
+            format_name (Format): The format to filter by.
+                                  Il formato da filtrare.
+            colors (str, optional): Color filter (w,u,b,r,g).
+                                    Filtro colore (w,u,b,r,g).
             
         Returns:
-            List[Dict]: List of card data dictionaries
+            List[Dict]: List of card data dictionaries.
+                        Elenco di dizionari di dati delle carte.
         """
         url = f"{self.base_url}{self.search_endpoint}"
         query = f'f:{format_name.value} e:{set_code}'
@@ -117,7 +130,14 @@ def validate_format(value: str) -> Format:
         )
 
 def get_interactive_input() -> Dict:
-    """Get input parameters interactively from user."""
+    """
+    Get input parameters interactively from user.
+    Ottieni i parametri di input interattivamente dall'utente.
+    
+    Returns:
+        Dict: A dictionary of input parameters.
+              Un dizionario di parametri di input.
+    """
     print("\nWelcome to PyScryfall!")
     print("-" * 40)
     
