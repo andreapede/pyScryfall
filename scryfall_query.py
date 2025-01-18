@@ -1,5 +1,6 @@
 import requests
 import json
+import argparse
 
 def fetch_cards(set_name, legal_format='pauper', common_only=False):
     query = f'set:{set_name} legal:{legal_format}'
@@ -48,33 +49,22 @@ def print_cards(cards, number, set_name, legal_format, common_only, query):
     print(f"Total cards: {len(cards)}")
 
 def main():
-    set_name = input("Enter the set name (i.e. NEO): ").upper()
-    
-    # Provide choices for legal format
-    print("Choose the legal format:")
-    print("1. pauper")
-    print("2. standard")
-    print("3. modern")
-    print("4. legacy")
-    print("5. vintage")
-    legal_format_choice = int(input("Enter the format (default is 1 - Pauper): ") or 1)
-    legal_formats = ['pauper', 'standard', 'modern', 'legacy', 'vintage']
-    legal_format = legal_formats[legal_format_choice - 1]
+    parser = argparse.ArgumentParser(description='Fetch cards from Scryfall.')
+    parser.add_argument('set_name', type=str, help='The name of the card set')
+    parser.add_argument('--legal_format', type=str, default='pauper', help='The legal format of the cards')
+    parser.add_argument('--common_only', action='store_true', help='Fetch only common cards')
+    parser.add_argument('--number_choice', type=int, default=0, help='Enter a number to put in front the list from 0 to 4')
+    parser.add_argument('--output_choice', type=str, default='n', help='Do you want to save the result to a file? (y/n)')
 
-    common_only = False
-    if legal_format == 'pauper':
-        common_only = input("Extract only common cards? (y/n, default n): ").strip().lower() == 'y'
-    
-    number_choice = int(input("Enter a number to put in front the list from 0 to 4 (default is 0): ") or 0)
-    output_choice = input("Do you want to save the result to a file? (y/n, default n): ").strip().lower() or 'n'
+    args = parser.parse_args()
 
-    cards, query = fetch_cards(set_name, legal_format, common_only)
+    cards, query = fetch_cards(args.set_name, args.legal_format, args.common_only)
     
     # Pass query parameters to print_cards
-    print_cards(cards, number_choice, set_name, legal_format, common_only, query)
+    print_cards(cards, args.number_choice, args.set_name, args.legal_format, args.common_only, query)
     
     # Optionally save to file
-    if output_choice == 'y':
+    if args.output_choice == 'y':
         filename = input("Enter the filename to save the results: ")
         save_to_file(cards, filename)
         print(f"Results saved to {filename}")
