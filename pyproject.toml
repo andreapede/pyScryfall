@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyscryfall"
+version = "1.0.0"
+description = "A Python wrapper for the Scryfall API with advanced filtering and formatting."
+readme = "README.md"
+authors = [
+    {name = "Andrea Pede"},
+    {name = "Jules", email = "jules@example.com"}
+]
+license = {text = "Attribution-Only License"}
+requires-python = ">=3.8"
+dependencies = [
+    "requests",
+]
+
+[project.scripts]
+pyscryfall = "pyscryfall.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "requests-mock",
+]
